@@ -1,0 +1,7 @@
+{
+  "extends": "./.nuxt/tsconfig.json",
+  "target": "es2022",
+  "compilerOptions": {
+    "strict": true
+  }
+}
