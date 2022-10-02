@@ -1,12 +1,15 @@
 <script setup lang="ts">
-async function login(event: Event) {
-  if (Event !== null){
-    const { email, userName, password } = Object.fromEntries(new FormData(event.target))
-    const myToken = btoa(`${email}:${userName}:${password}`)
-    const res = await $fetch('/api/register', {
-      headers: { authorization: `${myToken}` },
-    })
-  }
+async function login(event: SubmitEvent) {
+  const { email, userName, password } = Object.fromEntries(new FormData(event.target))
+  const myToken = btoa(`${email}:${userName}:${password}`)
+  console.log(myToken)
+  const res = await $fetch('/api/register', {
+    method: 'post',
+    body: {
+      token: myToken,
+    },
+  })
+  console.log(res)
 }
 </script>
 
@@ -37,6 +40,9 @@ async function login(event: Event) {
         </button>
       </div>
     </form>
+    <NuxtLink to="/">
+      Login page
+    </NuxtLink>
     <DarkToggle />
   </div>
 </template>
